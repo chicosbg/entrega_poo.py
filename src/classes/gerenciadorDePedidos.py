@@ -1,48 +1,44 @@
 from gerenciadorDeVeiculos import GerenciadorDeVeiculos
+from pedido import Pedido
 
 class GerenciadorDePedidos:
-    def __init__(self):
-        self.veiculos =
-    def defineVeiculosTransport(self, listaPedidos):
+    def __init__(self, veiculos: GerenciadorDeVeiculos):
+        self._veiculos = veiculos
+        self._pedidos = []
         
-        veiculosAtivos = this -> veiculos -> getVeiculosAtivos()
+    def defineVeiculosTransport(self, listaPedidos):
+        veiculosAtivos = self._veiculos.getVeiculosAtivos()
+        indicesAdicionados = []
+        
+        for veiculo in veiculosAtivos:
+            capacidadeTotalDoVeiculo = veiculo.getCapacidadeDeCarga()
+            contagemAtual = 0
+            for pedido in listaPedidos:
+                if (pedido.getPesoDaCarga() > capacidadeTotalDoVeiculo):
+                    continue
 
-        for (Veiculo * veiculo: *veiculosAtivos) {
-            capacidadeTotalDoVeiculo = veiculo -> getCapacidadeDeCarga();
-            contagemAtual = 0;
-            for (Pedido * pedido: *listaPedidos) {
-                if (pedido -> getPesoDaCarga() > capacidadeTotalDoVeiculo) continue;
+                if (not indicesAdicionados[contagemAtual]):
+                    continue
 
-                if (!indicesAdicionados[contagemAtual]) continue ;
+                pedido.setVeiculoDeTransporte(veiculo)
 
-                pedido -> setVeiculoDeTransporte(veiculo);
+                self._pedidos.append(pedido)
 
-                this -> pedidos -> push_back(pedido);
+                indicesAdicionados[contagemAtual] = contagemAtual
 
-                indicesAdicionados[contagemAtual] = contagemAtual;
-
-                capacidadeTotalDoVeiculo = capacidadeTotalDoVeiculo - pedido -> getPesoDaCarga();
-            }
-        }
-
-
-bool GerenciadorPedido:: defineVeiculosTransport(Pedido * pedido) {
-    list < Veiculo * > *veiculosAtivos = this -> veiculos -> getVeiculosAtivos();
-    for (Veiculo * veiculo: *veiculosAtivos) {
-        if (pedido -> getPesoDaCarga() > veiculo -> getCapacidadeDeCarga()) continue;
-        pedido -> setVeiculoDeTransporte(veiculo);
-        this -> pedidos -> push_back(pedido);
-        return true;
-    }
-    return false;
-}
-
-
-def GerenciadorPedido:: realizarEntrega()
-
-
-// finalizar entrega do pedido, atualizar status do veiculo e do pedido e remover pedido da lista de pedidos ativos, e liberar a memeoria do pedido, e no final setar a localizacao do veiculo como o local de entrega do pedido
-for (Pedido * pedido: *this -> pedidos) {
-    pedido -> getVeiculoDeTransporte() -> setLocalizacao(pedido -> getLocalDeEntrega());
-    delete pedido;
-}
+                capacidadeTotalDoVeiculo = capacidadeTotalDoVeiculo - pedido.getPesoDaCarga()
+                
+    def defineVeiculosTransport(self, pedido: Pedido):
+        veiculosAtivos = self._veiculos.getVeiculosAtivos()
+        for veiculo in veiculosAtivos:  
+            if(pedido.getPesoDaCarga() > veiculo.getCapacidadeDeCarga()): 
+                continue 
+            pedido.setVeiculoDeTransporte(veiculo)
+            self._pedidos.append(pedido)
+            return True
+        
+        return False
+    
+    def realizarEntrega(self):
+        for pedido in self._pedidos:
+            pedido.getVeiculoDeTransporte().setLocalizacao(pedido.getLocalDeEntrega())
