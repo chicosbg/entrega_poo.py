@@ -10,3 +10,10 @@ class Coordenada:
     def setLongitude(self, longitude):
         self._longitude = longitude
     
+    def getLatitude(self):
+        return self._latitude
+    
+    
+    def getLongitude(self):
+        return self._longitude
+    
