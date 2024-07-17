@@ -2,11 +2,12 @@ from gerenciadorDeVeiculos import GerenciadorDeVeiculos
 from pedido import Pedido
 
 class GerenciadorDePedidos:
+    
     def __init__(self, veiculos: GerenciadorDeVeiculos):
         self._veiculos = veiculos
         self._pedidos = []
         
-    def defineVeiculosTransport(self, listaPedidos):
+    def defineVeiculosTransporte(self, listaPedidos):
         veiculosAtivos = self._veiculos.getVeiculosAtivos()
         indicesAdicionados = []
         

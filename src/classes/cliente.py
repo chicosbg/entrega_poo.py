@@ -1,7 +1,8 @@
 class Cliente:
-    def __init__(self, nome, cpf, email, endereco):
+    def __init__(self, nome=None, cpf=None, telefone=None, email=None, endereco=None):
         self._nome = nome
         self._cpf = cpf
+        self._telefone = telefone
         self._email = email
         self._endereco = endereco
 
@@ -16,6 +17,12 @@ class Cliente:
 
     def setCpf(self, cpf):
         self._cpf = cpf
+
+    def getTelefone(self):
+        return self._telefone
+
+    def setTelefone(self, telefone):
+        self._telefone = telefone
 
     def getEmail(self):
         return self._email
